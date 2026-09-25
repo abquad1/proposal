@@ -1,284 +1,379 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <title> Package</title>
-        <link rel="icon" type="image/shortcut-icon" href="flower.png">
-      
+  <head>
+    <title>Package</title>
+    <link rel="icon" type="image/shortcut-icon" href="flower.png" />
 
-        <style >
-            *{
-                padding: 0;
-                margin: 0;
-            }
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
 
-            body{
-                height: 100vh;
-                width: 100%;
-                background-color: #f3c7c7;
-                position: relative;
-            }
+      body {
+        height: 100vh;
+        width: 100%;
+        background-color: #f3c7c7;
+        position: relative;
+        overflow: hidden;
+      }
 
-            
+      .stage {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -55%);
+        width: 420px;
+        height: 420px;
+      }
 
-            .envelope{
-                height: 0;
-                width: 0;
-                border-right: 600px solid transparent;
-                border-bottom: 450px solid rgb(138, 31, 31);
-                position: absolute;
-                top: 28%;
-                left: 34%;
-                cursor: pointer;
-                
-            }
+      .envelope {
+        position: absolute;
+        bottom: 0;
+        left: 10px;
+        width: 400px;
+        height: 250px;
+      }
 
-            .envelope::before{
-                content: "";
-                height: 450px;
-                width: 600px;
-                background-color: red;
-                /* border-right: 150px solid transparent;
-                border-bottom: 80px solid red; */
-                position: absolute;
-                top: 45%;
-                left: 45%;
-                z-index: -100;
-            }
-            .envelope-back{
-                height: 0;
-                width: 0;
-                border-left: 600px solid transparent;
-                border-bottom: 450px solid rgb(193, 41, 41);
-                position: absolute;
-                top: 45%;
-                left: 45%;
-            }
+      .envelope-base {
+        /* position: absolute;
+        inset: 0;
+        background: #8a1f1f;
+        border-radius: 6px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); */
 
-            .envelope-top{
-                height: 0;
-                width: 0;
-                border-left: 300px solid transparent;
-                border-right: 300px solid transparent;
-                border-bottom: 195px solid rgb(138, 31, 31);
-                position: relative;
-                top: 1.2%;
-                left: 34%;
-                
-            }
+        height: 0;
+        width: 0;
+        border-left: 400px solid transparent;
+        border-bottom: 250px solid rgb(193, 41, 41);
+        position: absolute;
+        top: 0;
+        left: 0%;
+      }
 
-            .letter{
-                height: 360px;
-                width: 600px;
-                background-color: #fff;
-                position: relative;
-                top: 0;
-                z-index: -10;
-                translate: transform 0.2s ease-in-out
-            }
+      .envelope-base1 {
+        /* position: absolute;
+        inset: 0;
+        background: #8a1f1f;
+        border-radius: 6px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); */
 
-            .text{
-                height: 270px;
-                width: 510px;
-                margin: 37px;
-                position: absolute;
-                top: 0%;
-                left: 0%;
-                color: rgb(193, 41, 41);
-                font-family: 'Courier New', Courier, monospace;
-                display: flex;
-                /* align-items: center; */
-                justify-content: center;
-                border: 1px solid rgb(193, 41, 41);
-                /* z-index: -10; */
-            }
+        height: 0;
+        width: 0;
+        border-right: 400px solid transparent;
+        border-bottom: 250px solid rgb(171, 25, 25);
+        position: absolute;
+        top: 0;
+        left: 0%;
+      }
 
-            .text p{
-                /* width: 60px; */
-                font-size: 35px;
-                text-align: center;
-                margin-left: -20px;
-                margin-top: 27%;
-                font-weight: 700;
-            }
+      .envelope-pocket {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-left: 200px solid transparent;
+        border-right: 200px solid transparent;
+        /* border-bottom: 125px solid #7a1a1a; */
+        z-index: 1;
+      }
 
-            .buttons{
-                position: absolute;
-                top: 93%;
-                left: 48%;
-            }
+      .envelope-flap {
+        position: absolute;
+        top: -140px;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-left: 200px solid transparent;
+        border-right: 200px solid transparent;
+        border-bottom: 140px solid #932424;
+        z-index: -2;
+      }
 
-            .buttons button{
-                height: 30px;
-                width: 40px;
-                background-color: rgb(193, 41, 41);
-                margin-right: 25px;
-                border: none;
-                border-radius: 10px;
-                box-shadow: 2px 3px 3px #fff;
-                color: #fff;
-                font-weight: 700;
-                cursor: pointer;
-            }
+      #clickMe {
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 34px;
+        width: 110px;
+        border: none;
+        border-radius: 10px;
+        color: #932424;
+        background-color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+        z-index: 10;
+        box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.25);
+      }
 
-            .buttons button:hover{
-                color: rgb(193, 41, 41);
-                background-color: #fff;
-            }
+      #clickMe:hover {
+        background-color: #932424;
+        color: #fff;
+      }
 
-            #clickMe{
-                height: 30px;
-                width: 100px;
-                margin-right: 25px;
-                border: none;
-                border-radius: 10px;
-                /* box-shadow: 2px 3px 3px #fff; */
-                color: rgb(193, 41, 41);
-                background-color: #fff;
-                font-weight: 700;
-                cursor: pointer;
-                position: absolute;
-                left: 50%;
-                top: 70%;
-            }
+      .letter {
+        position: absolute;
+        bottom: 15px;
+        left: 10px;
+        width: 400px;
+        height: 220px;
+        background: #fff;
+        border-radius: 4px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        z-index: 0;
+        transition: transform 0.7s ease;
+        transform: translateY(0);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        text-align: center;
+        font-family: "Courier New", Courier, monospace;
+        color: #932424;
+      }
 
-            #clickMe:hover{
-                background-color: rgb(138, 31, 31);
-                color: #fff;
-            }
+      .letter.open {
+        transform: translateY(-100px);
+      }
 
-            .sideImg1{
-                width: 100px;
-                position: absolute;
-                top: 5%;
-                left: 5%;
-                animation-name: example1;
-                animation-duration: 4s;
-                animation-iteration-count: infinite;
-            }
+      .letter p {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 25px;
+      }
 
-            .sideImg2{
-                width: 100px;
-                position: absolute;
-                top: 10%;
-                left: 90%;
-                animation-name: example2;
-                animation-duration: 4s;
-                animation-iteration-count: infinite;
-            }
+      .letter-buttons {
+        display: flex;
+        gap: 20px;
+      }
 
-            .sideImg3{
-                width: 100px;
-                position: absolute;
-                top: 70%;
-                left: 10%;
-                animation-name: example3;
-                animation-duration: 4s;
-                animation-iteration-count: infinite;
-            }
+      .letter-buttons button {
+        height: 36px;
+        width: 90px;
+        background-color: #932424;
+        border: 1px solid #932424;
+        border-radius: 10px;
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.2);
+      }
 
-            .sideImg4{
-                width: 100px;
-                position: absolute;
-                top: 80%;
-                left: 80%;
-                animation-name: example4;
-                animation-duration: 4s;
-                animation-iteration-count: infinite;
-            }
+      .letter-buttons button:hover {
+        color: #932424;
+        background-color: #fff;
+      }
 
-            @keyframes example1 {
-  0%   { left:0px; top:0px;}
-  25%  { left:50px; top:50px;}
-  50%  { left:100px; top:0px;}
-  75%  { left:200px; top:200px;}
-  100% { left:250px; top:0px;}
-}
-@keyframes example3 {
-  0%   { left:10%; top:70%;}
-  25%  { left:20%; top:80%;}
-  50%  { left:25%; top:60%;}
-  75%  { left:30%; top:80%;}
-  100% { left:10%; top:70%;}
-}
+      .heart {
+        position: absolute;
+        font-size: 45px;
+        user-select: none;
+        pointer-events: none;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        z-index: 10;
+      }
 
-@keyframes example2 {
-  0%   { left:90%; top:10%;}
-  25%  { left:70%; top:30%;}
-  50%  { left:80%; top:60%;}
-  75%  { left:75%; top:80%;}
-  100% { left:90%; top:10%;}
-}
+      .heart1 {
+        top: 5%;
+        left: 5%;
+        animation-name: roam1;
+        animation-duration: 9s;
+      }
+      .heart2 {
+        top: 10%;
+        left: 90%;
+        animation-name: roam2;
+        animation-duration: 10s;
+      }
+      .heart3 {
+        top: 70%;
+        left: 10%;
+        animation-name: roam3;
+        animation-duration: 11s;
+      }
+      .heart4 {
+        top: 80%;
+        left: 80%;
+        animation-name: roam4;
+        animation-duration: 8.5s;
+      }
+      .heart5 {
+        top: 40%;
+        left: 2%;
+        animation-name: roam5;
+        animation-duration: 12s;
+      }
+      .heart6 {
+        top: 15%;
+        left: 45%;
+        animation-name: roam6;
+        animation-duration: 9.5s;
+      }
 
-@keyframes example4 {
-  0%   { left:80%; top:80%;}
-  25%  { left:85%; top:70%;}
-  50%  { left:75%; top:60%;}
-  75%  { left:65%; top:50%;}
-  100% { left:60%; top:30%;}
-}
-        </style>
-    </head>
-    <body>
-        
-            <div class="envelope" id="envelope">
-                <div class="envelope-back"></div>
-                
-                <div class="letter" id="letter">
-                    <div class="text"><p>Will you be my Girlfriend?</p></div>
+      @keyframes roam1 {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        20% {
+          transform: translate(60vw, 10vh) rotate(45deg);
+        }
+        40% {
+          transform: translate(80vw, 60vh) rotate(90deg);
+        }
+        60% {
+          transform: translate(30vw, 75vh) rotate(180deg);
+        }
+        80% {
+          transform: translate(10vw, 30vh) rotate(270deg);
+        }
+        100% {
+          transform: translate(0, 0) rotate(360deg);
+        }
+      }
 
-                </div>
-            </div>
+      @keyframes roam2 {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        20% {
+          transform: translate(-70vw, 20vh) rotate(-45deg);
+        }
+        40% {
+          transform: translate(-50vw, 65vh) rotate(-90deg);
+        }
+        60% {
+          transform: translate(-20vw, 40vh) rotate(-180deg);
+        }
+        80% {
+          transform: translate(-60vw, 5vh) rotate(-270deg);
+        }
+        100% {
+          transform: translate(0, 0) rotate(-360deg);
+        }
+      }
 
-            <div class="envelope-top" id="top" > </div>
+      @keyframes roam3 {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        25% {
+          transform: translate(50vw, -40vh) scale(1.3);
+        }
+        50% {
+          transform: translate(70vw, -10vh) scale(0.9);
+        }
+        75% {
+          transform: translate(20vw, -55vh) scale(1.2);
+        }
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+      }
 
-            <img alt="" src="./flower.png" class="sideImg1" id="flowerImg">
-            
-            <img alt="" src="./flower.png" class="sideImg2" id="flowerImg">
-            <img alt="" src="./flower.png" class="sideImg3" id="flowerImg">
-            <img alt="" src="./flower.png" class="sideImg4" id="flowerImg">
+      @keyframes roam4 {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        25% {
+          transform: translate(-55vw, -30vh) rotate(60deg);
+        }
+        50% {
+          transform: translate(-15vw, -60vh) rotate(150deg);
+        }
+        75% {
+          transform: translate(-40vw, -15vh) rotate(260deg);
+        }
+        100% {
+          transform: translate(0, 0) rotate(360deg);
+        }
+      }
 
-            <button  id="clickMe">Click Me</button>
+      @keyframes roam5 {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        20% {
+          transform: translate(40vw, -20vh) scale(1.4);
+        }
+        40% {
+          transform: translate(85vw, 10vh) scale(1);
+        }
+        60% {
+          transform: translate(60vw, 40vh) scale(1.3);
+        }
+        80% {
+          transform: translate(20vw, 20vh) scale(0.8);
+        }
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+      }
 
+      @keyframes roam6 {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        30% {
+          transform: translate(-30vw, 55vh) rotate(-90deg);
+        }
+        60% {
+          transform: translate(20vw, 70vh) rotate(-200deg);
+        }
+        100% {
+          transform: translate(0, 0) rotate(-360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <span class="heart heart1">❤️</span>
+    <span class="heart heart2">💕</span>
+    <span class="heart heart3">💖</span>
+    <span class="heart heart4">💘</span>
+    <span class="heart heart5">💗</span>
+    <span class="heart heart6">💓</span>
 
-            <div class="buttons">
-               
-                <button onclick="window.location.href = 'yes.html' ">YES</button>
-                
-                <button onclick="window.location.href = 'No.html' ">NO</button>
+    <div class="stage">
+      <div class="letter" id="letter">
+        <p>Will you be my Girlfriend?</p>
+        <div class="letter-buttons">
+          <button
+            onclick="
+              window.open(
+                'https://wa.me/2348143967609?text=Yes! I will be your girlfriend. I love you',
+                '_blank',
+              )
+            "
+          >
+            YES
+          </button>
+          <button onclick="window.location.href = 'No.html'">NO</button>
+        </div>
+      </div>
 
-            </div>
-            
+      <div class="envelope">
+        <div class="envelope-base"></div>
+        <div class="envelope-base1"></div>
+        <div class="envelope-pocket"></div>
+        <div class="envelope-flap"></div>
+        <button id="clickMe">Click Me</button>
+      </div>
+    </div>
 
-            <script>
-               const envelope = document.getElementById('clickMe')
-               const letter = document.getElementById('letter')
-            //    const flower = document.getElementById('flowerImg')
-            //    const top = document.getElementById('top')
+    <script>
+      const clickMe = document.getElementById("clickMe");
+      const letter = document.getElementById("letter");
 
-
-
-                let isTransformed = false
-                envelope.addEventListener("click", function(){
-
-                    if (isTransformed) {
-                        letter.style.transform = "translateY(-120px)"
-                        letter.style.zIndex = "-1"
-                    } else{
-                        letter.style.transform = "translateY(0)"
-                        letter.style.zIndex = "-1"
-                    }
-
-               const top = document.getElementById('top')
-
-                top.style.zIndex = "-10";
-                
-
-
-                    isTransformed =!isTransformed
-                    
-                })
-
-                         
-            </script>
-        </body>
+      let isOpen = false;
+      clickMe.addEventListener("click", function () {
+        isOpen = !isOpen;
+        letter.classList.toggle("open", isOpen);
+      });
+    </script>
+  </body>
 </html>
