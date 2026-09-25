@@ -34,41 +34,30 @@
         left: 10px;
         width: 400px;
         height: 250px;
+        pointer-events: none;
       }
 
       .envelope-base {
-        /* position: absolute;
-        inset: 0;
-        background: #8a1f1f;
-        border-radius: 6px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); */
-
         height: 0;
         width: 0;
         border-left: 400px solid transparent;
         border-bottom: 250px solid rgb(193, 41, 41);
         position: absolute;
         top: 0;
-        left: 0%;
+        left: 0;
       }
 
       .envelope-base1 {
-        /* position: absolute;
-        inset: 0;
-        background: #8a1f1f;
-        border-radius: 6px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); */
-
         height: 0;
         width: 0;
         border-right: 400px solid transparent;
         border-bottom: 250px solid rgb(171, 25, 25);
         position: absolute;
         top: 0;
-        left: 0%;
+        left: 0;
       }
 
-      .envelope-pocket {
+      /* .envelope-pocket {
         position: absolute;
         bottom: 0;
         left: 0;
@@ -76,9 +65,9 @@
         height: 0;
         border-left: 200px solid transparent;
         border-right: 200px solid transparent;
-        /* border-bottom: 125px solid #7a1a1a; */
+        border-bottom: 125px solid #7a1a1a;
         z-index: 1;
-      }
+      } */
 
       .envelope-flap {
         position: absolute;
@@ -89,7 +78,7 @@
         border-left: 200px solid transparent;
         border-right: 200px solid transparent;
         border-bottom: 140px solid #932424;
-        z-index: -2;
+        z-index: -10;
       }
 
       #clickMe {
@@ -107,6 +96,7 @@
         cursor: pointer;
         z-index: 10;
         box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.25);
+        pointer-events: auto;
       }
 
       #clickMe:hover {
@@ -137,7 +127,7 @@
       }
 
       .letter.open {
-        transform: translateY(-100px);
+        transform: translateY(-120px);
       }
 
       .letter p {
@@ -359,7 +349,7 @@
       <div class="envelope">
         <div class="envelope-base"></div>
         <div class="envelope-base1"></div>
-        <div class="envelope-pocket"></div>
+        <!-- <div class="envelope-pocket"></div> -->
         <div class="envelope-flap"></div>
         <button id="clickMe">Click Me</button>
       </div>
